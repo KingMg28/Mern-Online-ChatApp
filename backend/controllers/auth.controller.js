@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs"
 
 import  User from "../models/user.model.js"
-import generateTokenAndSetcookie from "../utils/generateToken.js"
+import generateTokenAndSetCookie from "../utils/generateToken.js"
 
 export const signup = async(req, res)=>{
 
@@ -20,7 +20,6 @@ export const signup = async(req, res)=>{
 
         //hash password
         const salt = await bcrypt.genSalt(10);
-
         const hashedPassword = await bcrypt.hash(password, salt)
 
         const malePicProf = `https://avatar.iran.liara.run/public/boy?username=${username}`
@@ -36,16 +35,21 @@ export const signup = async(req, res)=>{
 
         if(newUser){
             //Generate JWT token and set as cookie
-            generateTokenAndSetcookie(newUser._id, res)
+              generateTokenAndSetCookie({
+			    _id: newUser._id,
+			    fullName: newUser.fullname,
+			    username: newUser.username,
+			    profilePic: newUser.profilePic,
+		    }, res);
 
             await newUser.save()
 
             res.status(201).json({
-                _id: newUser._id,
-                fullname: newUser.fullname,
-                username: newUser.username,
-                profilePic: newUser.profilePic,
-            })
+				_id: newUser._id,
+				fullName: newUser.fullName,
+				username: newUser.username,
+				profilePic: newUser.profilePic,
+			});
         }else{
             res.status(400).json({error: "Invalid user data."})
         }
@@ -61,28 +65,26 @@ export const login = async(req, res)=>{
 
     try{
         const {username, password} = req.body
-
         const user = await User.findOne({username})
+		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
         
-        if(user){
-        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "")
-
         if(!user || !isPasswordCorrect){
             return res.status(400).json({erorr: "Invalid username or password"})
         }
 
-        generateTokenAndSetcookie(user._id, res)
+        generateTokenAndSetCookie({
+			_id: user._id,
+			fullName: user.fullname,
+			username: user.username,
+			profilePic: user.profilePic,
+		}, res);
 
-        res.status(200).json({
-            _id: user._id,
-            fullname: user.fullname,
-            username: user.username,
-            profilePic: user.profilePic,
-        })
-        }else{
-            res.status(400).json({ error: "Invalid user data." });
-        }
-        
+		res.status(200).json({
+			_id: user._id,
+			fullName: user.fullname,
+			username: user.username,
+			profilePic: user.profilePic,
+		});
     }catch(error){
         console.log("Error in Login controller", error.message)
         res.status(500).json({error: "Internal Server Error"})
@@ -98,5 +100,4 @@ export const logout = async(req, res)=>{
         console.log("Error in Logout controller", error.message)
         res.status(500).json({error: "Internal Server Error"})
     }
-
 }
