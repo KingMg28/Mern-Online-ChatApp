@@ -36,7 +36,7 @@ const useConversation = create<ConversationType>((set) => ({
       messages: [...state.messages, newMessage],
     })),
   setAllMessages: (newMessages: MessageType[]) =>
-    set((state) => ({
+    set(() => ({
       messages: newMessages,
     })),
 }));

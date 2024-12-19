@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext, AuthType } from "../context/AuthContext";
 import axios from "axios";
 
 const useLogout = () => {
@@ -18,7 +18,7 @@ const useLogout = () => {
       })
       .then(() => {
         localStorage.removeItem("online-chat");
-        setAuth("");
+        setAuth(null as AuthType);
 
         toast.success("Successfully Log out");
         setIsLoading(false);

@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactNode, useContext, useState } from "react";
 
-type AuthType = {
+export type AuthType = {
   _id: string;
   fullName: string;
   username: string;
