@@ -5,7 +5,7 @@
   "scripts": {
     "server": "nodemon backend/server.js",
     "start": "node backend/server.js",
-    "build" : "npm i && npm i --prefix frontend && npm run build --prefix frontend"
+    "build": "npm i && npm i --prefix frontend && npm run build --prefix frontend"
   },
   "type": "module",
   "author": "",
@@ -23,6 +23,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
     "react-hot-toast": "^2.4.1",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "tailwind-scrollbar": "^3.1.0",
+    "tailwind-scrollbar-hide": "^2.0.0"
   }
 }

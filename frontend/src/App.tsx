@@ -10,7 +10,7 @@ function App() {
   // const { auth } = useContext(AuthContext);
   const {auth} = useAuth();
   return (
-    <div className="p-4 h-screen flex items-center justify-center">
+    <div className="p-4 py-12 h-screen flex items-center justify-center">
       <Routes>
         <Route
           path="/"

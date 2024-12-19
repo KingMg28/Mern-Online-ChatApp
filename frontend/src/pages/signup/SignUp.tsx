@@ -7,7 +7,7 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-2xl bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15">
+      <div className="w-full p-6 rounded-lg shadow-2xl bg-gray-600 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15  border  border-solid border-slate-700">
         <h1 className=" text-3xl font-semibold text-center text-gray-300">
           Sign Up
           <span className=" text-blue-400 ms-2">ChatApp </span>

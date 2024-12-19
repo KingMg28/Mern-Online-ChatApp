@@ -18,7 +18,7 @@ const Messages = () => {
   }, [messages]);
 
   return (
-    <div className="px-4 flex-1 overflow-auto">
+    <div className="px-4 flex-1 overflow-y-scroll  scrollbar-thin scrollbar-thumb-gray-950 scrollbar-track-gray-600 ">
       {!isLoading &&
         messages.map((message, index) => (
           <div key={index} ref={lastMessageRef}>
