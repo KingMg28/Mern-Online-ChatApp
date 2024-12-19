@@ -15,6 +15,7 @@ export type MessageType = {
   receiverId: string;
   senderId: string;
   updatedAt: string;
+  shouldShake?: boolean;
 };
 
 interface ConversationType {
