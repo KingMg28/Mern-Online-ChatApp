@@ -7,10 +7,9 @@ import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthContext";
 
 function App() {
-  // const { auth } = useContext(AuthContext);
-  const {auth} = useAuth();
+  const { auth } = useAuth();
   return (
-    <div className="p-4 py-12 h-screen flex items-center justify-center">
+    <div className="px-1 py-3 h-screen flex items-center justify-center md:py-6 md:px-4">
       <Routes>
         <Route
           path="/"

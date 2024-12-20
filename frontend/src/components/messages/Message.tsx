@@ -17,13 +17,15 @@ const Message = ({ messageContent }: { messageContent: MessageType }) => {
   const shakeClass = messageContent.shouldShake ? "shake" : "";
   return (
     <div className={`chat ${chatClassName}`}>
-      <div className=" chat-image avatar">
-        <div className=" w-10 rounded-full">
+      <div className=" chat-image avatar hidden md:block">
+        <div className=" w-10 rounded-full ">
           <img src={profilePic} alt="profile pic" />
         </div>
       </div>
       <div className={` chat-bubble text-white ${bubbleBgColor} ${shakeClass}`}>
-        {messageContent?.message}
+        <span className="whitespace-normal h-fit">
+          {messageContent?.message}
+        </span>
       </div>
       <div className=" chat-footer opacity-50 text-xs flex gap-1 items-center">
         {dateExtract}
