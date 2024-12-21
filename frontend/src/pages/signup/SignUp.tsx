@@ -94,6 +94,36 @@ const SignUp = () => {
               </label>
             </div>
           </div> */}
+          
+          {/* <div className="flex pt-3 ">
+            <label className=" label ">
+              <span className="text-base label-text"> Gender : </span>
+            </label>
+            <label className="label cursor-pointer">
+              <span className="label-text mx-2">Male</span>
+              <input
+                value={"male"}
+                type="radio"
+                name="radio-10"
+                className="radio"
+                checked={true}
+              />
+            </label>
+
+            <label className="label cursor-pointer">
+              <span className="label-text mx-2">Female</span>
+              <input
+                value={"female"}
+                type="radio"
+                name="radio-10"
+                className="radio"
+                checked={true}
+              />
+            </label>
+            <label htmlFor="password" className=" text-yellow-300">
+              {errors.gender?.message}
+            </label>
+          </div> */}
 
           <div>
             <label className=" label p-2">
@@ -103,7 +133,6 @@ const SignUp = () => {
               className="select select-bordered w-full h-10"
               {...register("gender")}
             >
-              <option disabled></option>
               <option value={"male"}>Male</option>
               <option value={"female"}>Female</option>
             </select>

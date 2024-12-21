@@ -1,21 +1,26 @@
-import useGetConversations from "../../hooks/useGetConversations";
+import useGetConversations from "../../hooks/useGetSidebarCoversations";
 import { getRandomEmoji } from "../../utils/emojis";
 import Conversation from "./Conversation";
 
 const Conversations = () => {
-  const { isLoading, conversations } = useGetConversations();
+  const { isLoading, sidebarConversations } = useGetConversations();
 
   return (
     <div className="py-2 flex flex-col overflow-auto">
       {isLoading && <span className=" loading loading-spinner"></span>}
-      {conversations?.map((conversation, indexId) => (
+      {sidebarConversations?.map((conversation, indexId) => (
         <Conversation
           key={conversation._id}
           conversation={conversation}
           emoji={getRandomEmoji()}
-          islastId={indexId === conversations.length - 1}
+          islastId={indexId === sidebarConversations.length - 1}
         />
       ))}
+      {sidebarConversations.length === 0 && (
+        <div className="flex items-center justify-center text-gray-400">
+          <span className=" text-center">Search and Find Your Friends Strat Conversation</span>
+        </div>
+      )}
     </div>
   );
 };
