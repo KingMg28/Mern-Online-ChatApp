@@ -1,30 +1,13 @@
 {
-  "name": "chat-online",
+  "name": "chat-app",
   "version": "1.0.0",
-  "main": "backend/server.js",
-  "scripts": {
-    "server": "nodemon backend/server.js",
-    "start": "node backend/server.js",
-    "build": "npm i && npm i --prefix frontend && npm run build --prefix frontend"
-  },
-  "type": "module",
-  "author": "",
-  "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "nodemon": "^3.1.7"
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
   },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.8.4",
-    "react-hot-toast": "^2.4.1",
-    "socket.io": "^4.8.1",
-    "tailwind-scrollbar": "^3.1.0",
-    "tailwind-scrollbar-hide": "^2.0.0"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
