@@ -1,5 +1,6 @@
-import User from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import Conversation from "../models/conversation.model.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -36,6 +37,12 @@ export const getUsersSidebar = async (req, res) => {
       );
     });
 
+    if (!filteredConversations) {
+      res
+        .status(404)
+        .json({ message: "Start new Conversation with search bar" });
+    }
+
     await res.status(200).json(filteredConversations);
   } catch (error) {
     console.log("Error in user controller", error.message);
@@ -65,4 +72,3 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-

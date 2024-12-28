@@ -3,26 +3,26 @@ import http from "http";
 import express from "express";
 
 const app = express();
-
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
 
-export const getReceiverSocketId = (receiverId) => {
-  return userSocketMap[receiverId];
+export const getReceiverSocketId = (userId) => {
+  return userSocketMap[userId];
 };
 
-const userSocketMap = {}; //{userId : socketId}
+const userSocketMap = {}; //{userId : socketId} // used to store online users
 
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
 
   const userId = socket.handshake.query.userId;
-  if (userId != "undefined") userSocketMap[userId] = socket.id;
+  if (userId) userSocketMap[userId] = socket.id;
 
   //io.emit() is used to send events to all the connected clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));

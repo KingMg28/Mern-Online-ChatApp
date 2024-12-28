@@ -1,30 +1,58 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import SignUp from "./pages/signup/SignUp";
+import Home from "./pages/HomePage";
+import Login from "./pages/LoginPage";
+import SignUp from "./pages/SignUpPage";
 import { Toaster } from "react-hot-toast";
-import { useAuth } from "./context/AuthContext";
+// import { useAuth } from "./context/AuthContext";
+import { useAuthStore } from "./store/useAuthStore";
+import { useEffect } from "react";
+import { Loader } from "lucide-react";
+import ProfilePage from "./pages/ProfilePage";
+import Navbar from "./components/Navbar";
+// import SettingPage from "./pages/SettingPage";
+import { useThemeStore } from "./store/useThemeStore";
 
 function App() {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+
+  const { theme } = useThemeStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (isCheckingAuth && !authUser)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
   return (
-    <div className="px-1 py-3 h-screen flex items-center justify-center md:py-6 md:px-4">
+    <div data-theme={theme}>
+      <Navbar />
+
       <Routes>
         <Route
           path="/"
-          element={auth ? <Home /> : <Navigate to={"/login"} />}
+          element={authUser ? <Home /> : <Navigate to={"/login"} />}
         />
         <Route
           path="/login"
-          element={auth ? <Navigate to={"/"} /> : <Login />}
+          element={authUser ? <Navigate to={"/"} /> : <Login />}
         />
         <Route
           path="/signup"
-          element={auth ? <Navigate to={"/"} /> : <SignUp />}
+          element={authUser ? <Navigate to={"/"} /> : <SignUp />}
+        />
+        {/* <Route path="/settings" element={<SettingPage />} /> */}
+        <Route
+          path="/profile"
+          element={authUser ? <ProfilePage /> : <Navigate to={"/login"} />}
         />
       </Routes>
-      <Toaster position="top-left" />
+
+      <Toaster position="bottom-center" />
     </div>
   );
 }

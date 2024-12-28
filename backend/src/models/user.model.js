@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Joi from "joi";
 
 const userSchema = new mongoose.Schema(
   {
@@ -29,6 +30,25 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);
 
-export default User;
+export const validateRegisterSignup = (newUser) => {
+  const schema = Joi.object({
+    fullname: Joi.string().min(5).max(50).required(),
+    username: Joi.string().min(5).max(50).required(),
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(5).max(255).required(),
+    profilePic: Joi.string(),
+  });
+
+  return schema.validate(newUser);
+};
+
+export const validateRegisterLogin = (newUser) => {
+  const schema = Joi.object({
+    username: Joi.string().min(5).max(50).required(),
+    password: Joi.string().min(5).max(255).required(),
+  });
+
+  return schema.validate(newUser);
+};
